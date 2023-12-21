@@ -6,13 +6,14 @@ pipeline {
         }
     }
     environment {
-    DOCKERHUB_CREDENTIALS = credentials('arpan223')
+        url = "https://github.com/Arpan223/nodejs-demo.git"
+        DOCKERHUB_CREDENTIALS = credentials('arpan223')
     }
     stages { 
         stage('SCM Checkout') {
             steps{
-            rm -rf *
-            git clone 'https://github.com/Arpan223/nodejs-demo.git'
+            sh "rm -rf *"
+            sh "git clone &url"
             }
         }
 
