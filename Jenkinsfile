@@ -13,7 +13,7 @@ pipeline {
         stage('SCM Checkout') {
             steps{
             sh "rm -rf *"
-            sh "git clone &url"
+            sh "git clone $url"
             }
         }
 
