@@ -18,7 +18,8 @@ pipeline {
         }
 
         stage('Build docker image') {
-            steps {  
+            steps { 
+                sh "cd nodejs-demo"
                 sh 'docker build -t arpan/nodeapp:$BUILD_NUMBER .'
             }
         }
