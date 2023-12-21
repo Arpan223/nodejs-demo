@@ -1,18 +1,23 @@
 pipeline {
-    agent any 
+    agent {
+        node {
+            label "Dev"
+            customWorkspace "/opt"
+        }
+    }
     environment {
     DOCKERHUB_CREDENTIALS = credentials('arpan223')
     }
     stages { 
         stage('SCM Checkout') {
             steps{
-            git 'https://github.com/ravdy/nodejs-demo.git'
+            git 'https://github.com/Arpan223/nodejs-demo.git'
             }
         }
 
         stage('Build docker image') {
             steps {  
-                sh 'docker build -t valaxy/nodeapp:$BUILD_NUMBER .'
+                sh 'docker build -t arpan/nodeapp:$BUILD_NUMBER .'
             }
         }
         stage('login to dockerhub') {
@@ -22,7 +27,7 @@ pipeline {
         }
         stage('push image') {
             steps{
-                sh 'docker push valaxy/nodeapp:$BUILD_NUMBER'
+                sh 'docker push arpan/nodeapp:$BUILD_NUMBER'
             }
         }
 }
